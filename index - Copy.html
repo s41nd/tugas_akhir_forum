@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+    />
+    <div> <!--FONT & ICON-->
+        <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+        <script>
+            WebFont.load({
+              google: { families: ["Public Sans:300,400,500,600,700"] },
+              custom: {
+                families: [
+                  "Font Awesome 5 Solid",
+                  "Font Awesome 5 Regular",
+                  "Font Awesome 5 Brands",
+                  "simple-line-icons",
+                ],
+                urls: ["assets/css/fonts.min.css"],
+              },
+              active: function () {
+                sessionStorage.fonts = true;
+              },
+            });
+          </script>
+    </div> <!-- END FONT & ICON-->
+    <div> <!--CSS-->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="assets/css/plugins.min.css" />
+        <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+    </div> <!--END CSS-->   
+
+    <title>Tugas Akhir Forum Game</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-background-color="dark"> <!--MENU BAR-->
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-item active"> <!--DASHBOARD-->
+                            <a data-bs-toogle="collapse" class="collapse" aria-expanded="false">
+                            <i class="fas fa-home"></i>
+                            <p>DASHBOARD</p>
+                        </li> <!--END DASHBOARD-->
+                        <li class="nav-section"> <!--CUMA PEMISAH-->
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h4 class="text-section">Components</h4>
+                        </li> <!-- END CUMA PEMISAH-->
+                    </ul>
+                </div>
+            </div>
+        </div> <!--END MENU BAR-->
+    </div>
+    
+</body>
+</html>
