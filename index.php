@@ -1,3 +1,11 @@
+<?php
+  session_start();
+
+  if(!isset($_SESSION['username'])){
+    header('location:login.php');
+  }
+  ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -56,7 +64,7 @@
         <div class="sidebar-logo">
           
           <div class="logo-header" data-background-color="dark"> <!-- Logo Header NORMAL SIZE-->
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
               <h4 style="color:aliceblue">FORUM GAME </h4>
             </a>
             <div class="nav-toggle">
@@ -288,10 +296,10 @@
                             />
                           </div>
                           <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <p class="text-muted">hello@example.com</p>
+                            <h4>Hizrian</h4> <!-- INI NANTI  NAMA -->
+                            <p class="text-muted">MEMBER</p> <!-- INI NANTI ROLE -->
                             <a
-                              href="profile.html"
+                              href="profile.php"
                               class="btn btn-xs btn-secondary btn-sm"
                               >View Profile</a
                             >
