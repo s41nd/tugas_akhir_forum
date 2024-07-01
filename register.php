@@ -1,3 +1,6 @@
+<?php 
+  include "config/db_connect.php";
+?>
 <!DOCTYPE html>
 <!-- Coding by CodingLab | www.codinglabweb.com-->
 <html lang="en">
@@ -19,10 +22,10 @@
   <body>
     <div class="container">
       <header>Sign Up Forum</header>
-      <form action="login.php"> <!--INI BUAT LINK-->
+      <form action="config/register.php" METHOD="POST"> <!--INI BUAT LINK-->
         <div class="field email-field">
           <div class="input-field">
-            <input type="email" placeholder="Enter your email as username" class="email" />
+            <input type="email" placeholder="Enter your email as username" class="email" name=username />
           </div>
           <span class="error email-error">
             <i class="bx bx-error-circle error-icon"></i>
@@ -35,14 +38,14 @@
               type="password"
               placeholder="Create password"
               class="password"
+              name="password"
             />
             <i class="bx bx-hide show-hide"></i>
           </div>
           <span class="error password-error">
             <i class="bx bx-error-circle error-icon"></i>
             <p class="error-text">
-              Please enter atleast 8 charatcer with number, symbol, small and
-              capital letter.
+              Please enter atleast 8 charatcer.
             </p>
           </span>
         </div>

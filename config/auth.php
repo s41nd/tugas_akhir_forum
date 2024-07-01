@@ -1,12 +1,12 @@
 <?php
-    include_once 'db_connect.php';
-    
+    // session_start();
+    include 'db_connect.php';
     // Mendapatkan username dan password dari form atau input
-    // $username = $_POST['username'];
-    // $password = $_POST['password'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-    $username="mengerti";
-    $password="mencoba";
+    // $username = "test@gmail.com";
+    // $password = "testtest";
     $hashed_password="";
     $role="";
 
@@ -23,17 +23,27 @@
         // Verifikasi kata sandi
         if (password_verify($password, $hashed_password)) {
             // Kata sandi cocok
-            echo "Login success";
-            echo "ID : $username + PASSWORD : $password + PASSWORD HASHING: $hashed_password";
 
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $role;
+            header("Location: ../index.php");
+            // echo "Login success";
+            // echo "ID : $username + PASSWORD : $password + PASSWORD HASHING: $hashed_password";
             // Redirect or set session variables upon successful login
-        } else {
+        } 
+        else {
             // Kata sandi tidak cocok
-            echo "Invalid username or password";
+            // header("Location: ../login.php");
+            echo '<script>alert("PASSWORD SALAH")</script>';
+            // href("Location: ../login.php");
         }
     } else {
+
         // Pengguna tidak ditemukan
-        echo "Invalid username or password";
+
+        // echo '<script>alert("USERNAME TIDAK TERDAFTAR")</script>';
+        // href("Location: ../login.php");
     }
     
     // Close statement

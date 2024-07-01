@@ -2,21 +2,21 @@
     include_once 'db_connect.php';
     
     // Mendapatkan username dan password dari form atau input
-    // $username = $_POST['username'];
-    // $password = $_POST['password'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = "MEMBER";
 
     // TDI COBA BUAT PASSWORD MENCOBA PASS NYA MENGERTI
-    $username="mengerti";
-    $password="mencoba";
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Prepare SQL statement
-    $stmt = $conn->prepare('INSERT INTO user (username, password) VALUES (?, ?)');
-    $stmt->bind_param('ss', $username, $hashed_password);
+    $stmt = $conn->prepare('INSERT INTO user (username, password, role) VALUES (?, ?, ?)');
+    $stmt->bind_param('sss', $username, $hashed_password, $role);
     
     if ($stmt->execute()) {
-        echo "Registration successful!";
+        echo '<script>alert("REGISTRASI SUKSES")</script>';
     } else {
         echo "Error: " . $conn->error;
+        // echo '<script>alert("Error : $conn->error")</script>';
     }
 ?>

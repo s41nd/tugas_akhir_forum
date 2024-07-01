@@ -2,7 +2,7 @@
     $servernamer_db = "localhost";
     $username_db = "root";
     $password_db = "";
-    $dbname = "mydb";
+    $dbname = "forum";
 
         $conn = new mysqli($servernamer_db, $username_db, $password_db, $dbname);
 
@@ -12,6 +12,6 @@
                 
             }
             else{
-                echo "BERHASIL CONNECT DATABASE";
+                // echo "BERHASIL CONNECT DATABASE";
             }
 ?>

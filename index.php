@@ -4,7 +4,7 @@
   if(!isset($_SESSION['username'])){
     header('location:login.php');
   }
-  ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,6 +60,7 @@
 
     <div class="wrapper">
       <!-- Sidebar -->
+
       <div class="sidebar" data-background-color="dark">
         <div class="sidebar-logo">
           
@@ -193,7 +194,6 @@
           </div>
         </div> <!-- End Sidebar -->
       </div>
-      
 
       <div class="main-panel">
         <div class="main-header">
@@ -307,8 +307,8 @@
                         </div>
                       </li>
                       <li>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <div class="dropdown-divider" action="config/logout.php"></div>
+                        <a class="dropdown-item">Logout</a>
                       </li>
                     </div>
                   </ul>
