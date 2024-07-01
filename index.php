@@ -1,6 +1,5 @@
 <?php
   session_start();
-
   if(!isset($_SESSION['username'])){
     header('location:login.php');
   }
@@ -66,7 +65,7 @@
           
           <div class="logo-header" data-background-color="dark"> <!-- Logo Header NORMAL SIZE-->
             <a href="index.php" class="logo">
-              <h4 style="color:aliceblue">FORUM GAME </h4>
+              <h4 style="color:aliceblue">FORUM GAME</h4>
             </a>
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
@@ -280,8 +279,8 @@
                       />
                     </div>
                     <span class="profile-username">
-                      <span class="op-7">Hi,</span>
-                      <span class="fw-bold">Hizrian</span>
+                      <span class="op-7">Hi, </span>
+                      <span class="fw-bold"><?=$_SESSION['nickname']?></span> <!--INI NANTI NICKNAME-->
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn" style="background-color:#ffead3;">
@@ -296,8 +295,8 @@
                             />
                           </div>
                           <div class="u-text">
-                            <h4>Hizrian</h4> <!-- INI NANTI  NAMA -->
-                            <p class="text-muted">MEMBER</p> <!-- INI NANTI ROLE -->
+                            <h4><?=$_SESSION['username']?></h4> <!-- INI NANTI  username -->
+                            <p class="text-muted"><?=$_SESSION['role']?></p> <!-- INI NANTI ROLE -->
                             <a
                               href="profile.php"
                               class="btn btn-xs btn-secondary btn-sm"
@@ -307,8 +306,8 @@
                         </div>
                       </li>
                       <li>
-                        <div class="dropdown-divider" action="config/logout.php"></div>
-                        <a class="dropdown-item">Logout</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="config/logout.php" class="dropdown-item">Logout</a>
                       </li>
                     </div>
                   </ul>

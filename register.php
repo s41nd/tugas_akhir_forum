@@ -29,7 +29,16 @@
           </div>
           <span class="error email-error">
             <i class="bx bx-error-circle error-icon"></i>
-            <p class="error-text">Please enter a valid email as username</p>
+            <p class="error-text">Tolong masukkan email yang valid sebagai username.</p>
+          </span>
+        </div>
+        <div class="field email-field">
+          <div class="input-field">
+            <input type="" placeholder="MASUKKAN NICKNAME MU" class="email" name=nickname />
+          </div>
+          <span class="error email-error">
+            <i class="bx bx-error-circle error-icon"></i>
+            <p class="error-text">Tolong masukkan email yang valid sebagai username.</p>
           </span>
         </div>
         <div class="field create-password">
@@ -45,7 +54,7 @@
           <span class="error password-error">
             <i class="bx bx-error-circle error-icon"></i>
             <p class="error-text">
-              Please enter atleast 8 charatcer.
+              password minimal 8 digit.
             </p>
           </span>
         </div>
@@ -60,7 +69,7 @@
           </div>
           <span class="error cPassword-error">
             <i class="bx bx-error-circle error-icon"></i>
-            <p class="error-text">Password don't match</p>
+            <p class="error-text">password tidak sesuai</p>
           </span>
         </div>
         <div class="input-field button">
