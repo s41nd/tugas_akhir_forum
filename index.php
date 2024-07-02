@@ -285,6 +285,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn" style="background-color:#ffead3;">
                     <div class="dropdown-user-scroll scrollbar-outer">
+                      
                       <li>
                         <div class="user-box">
                           <div class="avatar-lg">
@@ -305,10 +306,12 @@
                           </div>
                         </div>
                       </li>
+
                       <li>
                         <div class="dropdown-divider"></div>
                         <a href="config/logout.php" class="dropdown-item">Logout</a>
                       </li>
+
                     </div>
                   </ul>
                 </li>
