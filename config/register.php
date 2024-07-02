@@ -1,29 +1,6 @@
 <?php
     include_once 'db_connect.php';
     
-    // Mendapatkan username dan password dari form atau input
-    // $username = $_POST['username'];
-    // $password = $_POST['password'];
-    // $nickname = $_POST['nickname'];
-    // $role = "MEMBER";
-
-    // // TDI COBA BUAT PASSWORD MENCOBA PASS NYA MENGERTI
-    // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    // // Prepare SQL statement
-    // $t_user = $conn->prepare('INSERT INTO user (username, password, role) VALUES (?, ?, ?)');
-    // $t_user->bind_param('sss', $username, $hashed_password, $role);
-    // $t_profile= $conn->prepare('INSERT INTO profile (nickname,user_id) VALUES(?, $t_user.id)');
-    // $t_profile->bind_param('s',$nickname)
-    
-    // if ($stmt->execute()) {
-    //     // echo '<script>alert("REGISTRASI SUKSES")</script>';
-    //     echo "<script>alert('Registrasi sukses');window.location='../login.php'</script>";
-    // } else {
-    //     echo "Error: " . $conn->error;
-    //     // echo '<script>alert("Error : $conn->error")</script>';
-    // }
-    
     $username = $_POST['username'];
     $password = $_POST['password'];
     $role = 'MEMBER'; 
