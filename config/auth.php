@@ -6,7 +6,7 @@
     $hashed_password = "";
     
     // Prepare SQL statement to fetch user details
-    $stmt = $conn->prepare('SELECT u.id, u.username, u.password, u.role, p.nickname, p.description 
+    $stmt = $conn->prepare('SELECT u.id, u.username, u.password, u.role, p.nickname, p.description, p.profile_img 
                            FROM user u 
                            INNER JOIN profile p ON u.id = p.user_id 
                            WHERE u.username = ?');
@@ -14,7 +14,7 @@
     $stmt->execute();
     
     // Bind result variables
-    $stmt->bind_result($id, $username, $hashed_password, $role, $nickname, $description);
+    $stmt->bind_result($id, $username, $hashed_password, $role, $nickname, $description, $profile_img);
     
     if ($stmt->fetch()) {
         // Verifikasi kata sandi
@@ -28,6 +28,7 @@
             if (!empty($nickname)) {
                 $_SESSION['nickname'] = $nickname;
                 $_SESSION['description'] = $description;
+                $_SESSION['profile_img'] = $profile_img;
             }
             header("Location: ../index.php");
             

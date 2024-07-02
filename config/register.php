@@ -4,7 +4,8 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
     $role = 'MEMBER'; 
-    $nickname = $_POST['nickname']; 
+    $nickname = $_POST['nickname'];
+    $profile_img = 'no_profile.png'; 
     
     // Hash password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -18,8 +19,8 @@
         $user_id = $stmt_user->insert_id; // Dapatkan ID yang baru saja disisipkan
         
         // Persiapan statement untuk insert ke tabel profile
-        $stmt_profile = $conn->prepare('INSERT INTO profile (nickname, user_id) VALUES (?, ?)');
-        $stmt_profile->bind_param('si', $nickname, $user_id); // Menggunakan 'si' karena user_id adalah integer
+        $stmt_profile = $conn->prepare('INSERT INTO profile (nickname, user_id, profile_img) VALUES (?, ?, ?)');
+        $stmt_profile->bind_param('sis', $nickname, $user_id, $profile_img); // Menggunakan 'si' karena user_id adalah integer
         
         // Lakukan eksekusi statement untuk insert ke tabel profile
         if ($stmt_profile->execute()) {
