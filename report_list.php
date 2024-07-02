@@ -483,9 +483,216 @@
               </div>
 
             </div>
-            <!--ISI POSRT-->
-            <div class>
-              TEST
+            <!--ISI POST-->
+            ISI DI SINI SELAIN TABEL
+
+            <div name="TABEL REPORT">
+
+              <div name="div nya tabel report list">
+                <button class="btn btn-danger btn xl" type="button" data-bs-toggle="collapse" data-bs-target="#collapseListNew" aria-expanded="false" aria-controls="collapseListNew">
+                  LIST REPORT NEW
+                </button>
+
+                <div class="collapse" id="collapseListNew">
+                  <div class="card card-body">
+
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                      <div>
+                        <h3 class="fw-bold mb-3">REPORT SOLVE TODAY</h3>
+                        <!-- <h6 class="op-7 mb-2">What's New On post</h6> -->
+                      </div>
+                    </div>
+
+                    <table class="table table-head-bg-danger">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">First</th>
+                          <th scope="col">Last</th>
+                          <th scope="col">Handle</th>
+                        </tr>
+                      </thead>
+
+                      <tbody >
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                        </tr>
+                      </tbody>
+
+                    </table>
+
+                  </div>
+                </div>
+
+              </div>
+              
+              <br name="batas aja tabel">
+
+              <div name="div nya tabel report list selesai">
+
+                <button class="btn btn-warning btn xl" type="button" data-bs-toggle="collapse" data-bs-target="#collapseListOld" aria-expanded="false" aria-controls="collapseListOld">
+                  LIST REPORT SOLVE per day
+                </button>
+
+                <div class="collapse" id="collapseListOld">
+                  <div class="card card-body">
+
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                      <div>
+                        <h3 class="fw-bold mb-3">REPORT SOLVE TODAY</h3>
+                        <!-- <h6 class="op-7 mb-2">What's New On post</h6> -->
+                      </div>
+                    </div>
+
+                    <table class="table table-head-bg-warning">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">First</th>
+                          <th scope="col">Last</th>
+                          <th scope="col">Handle</th>
+                        </tr>
+                      </thead>
+
+                      <tbody >
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                        </tr>
+                      </tbody>
+
+                    </table>
+
+                  </div>
+                </div>
+
+              </div>             
+
             </div>  
 
           </div>
@@ -495,4 +702,5 @@
       <!-- End Custom template -->
     </div>
   </body>
+  
 </html>

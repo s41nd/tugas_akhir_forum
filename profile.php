@@ -345,7 +345,7 @@
 
               <div class="modal-dialog modal-dialog-centered" role="document">
 
-                <form class="modal-content" action="config/edit_profile.php" method="POST">
+                <form class="modal-content" action="config/edit_profile.php" method="POST" enctype="multipart/form-data">
 
                   <div class="modal-header">
                     <h5 class="modal-title fw-bold" id="exampleModalLabel">EDIT PROFILE</h5>
@@ -365,7 +365,7 @@
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">GANTI FOTO PROFILE :</label>
                       <br>
-                      <input type="file" name="profile_image" accept=".jpg .jpeg .png" value=""> 
+                      <input type="file" name="profile_image" accept=".jpg, .jpeg, .png" value=""> 
                     </div>
 
                   </div>
@@ -376,9 +376,8 @@
                     </button>
                     <button type="submit" class="btn btn-primary">SIMPAN PERUBAHAN</button>
                   </div>
-
                 </form>
-                
+
               </div>
 
             </div> <!-- FORM EDIT AKHIR -->
@@ -436,11 +435,14 @@
                             role="tabpanel"
                             aria-labelledby="pills-home-tab"
                           > <!--ISI BAR-->
-                            <p>
-                              "INI NANTI GAMBAR PROFILE"
+                            <img src="assets/img/<?=$_SESSION['profile_img']?>" class="avatar avatar-xxl">
+                            
+                            <br>
+                            <p class="card-title">
+                              DESKRIPSI AKUN
                             </p>
 
-                            <p> <!--INI DESKRIPSI-->
+                            <p > <!--INI DESKRIPSI-->
                               <?=$_SESSION['description']?>
                             </p>
                             
