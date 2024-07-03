@@ -3,7 +3,9 @@
       if(!isset($_SESSION['username'])){
         header('location:login.php');
       }
+    
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +66,7 @@
         <div class="sidebar-logo">
           
           <div class="logo-header" data-background-color="dark"> <!-- Logo Header NORMAL SIZE-->
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
               <h4 style="color:aliceblue">FORUM GAME </h4>
             </a>
             <div class="nav-toggle">
@@ -97,7 +99,7 @@
                 <div class="collapse" id="dashboard">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="../forum/index.html">
+                      <a href="../forum/index.php">
                         <span class="sub-item">Dashboard</span>
                       </a>
                     </li>
@@ -198,7 +200,7 @@
         <div class="main-header"> <!-- MAIN HADER --> <!--SEARH BAR + PROFILE-->
           <div class="main-header-logo"> <!-- Logo Header -->
             <div class="logo-header" data-background-color="dark">
-              <a href="index.html" class="logo">
+              <a href="index.php" class="logo">
                 <h1 style="color: antiquewhite;">FORUM GAME ONLINE</h1>
               </a>
               <div class="nav-toggle">
@@ -273,14 +275,14 @@
                   >
                     <div class="avatar-sm">
                       <img
-                        src="assets/img/profile.jpg"
+                        src="assets/img/<?=$_SESSION['profile_img']?>"
                         alt="..."
                         class="avatar-img rounded-circle"
                       />
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
-                      <span class="fw-bold">Hizrian</span>
+                      <span class="fw-bold"><?=$_SESSION['nickname']?></span>
                     </span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn" style="background-color:#ffead3;">
@@ -289,16 +291,16 @@
                         <div class="user-box">
                           <div class="avatar-lg">
                             <img
-                              src="assets/img/profile.jpg"
+                              src="assets/img/<?=$_SESSION['profile_img']?>"
                               alt="image profile"
                               class="avatar-img rounded"
                             />
                           </div>
                           <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <p class="text-muted">hello@example.com</p>
+                            <h4><?=$_SESSION['role']?></h4>
+                            <p class="text-muted"><?=$_SESSION['username']?></p>
                             <a
-                              href="profile.html"
+                              href="profile.php"
                               class="btn btn-xs btn-secondary btn-sm"
                               >View Profile</a
                             >
@@ -307,7 +309,7 @@
                       </li>
                       <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="config/logout.php">Logout</a>
                       </li>
                     </div>
                   </ul>
@@ -455,11 +457,7 @@
                             aria-labelledby="pills-profile-tab"
                           >
                             <p>
-                              Even the all-powerful Pointing has no control about
-                              the blind texts it is an almost unorthographic life
-                              One day however a small line of blind text by the name
-                              of Lorem Ipsum decided to leave for the far World of
-                              Grammar.
+                              INI NANTI GAMBAR BADGE
                             </p>
                             <p>
                               The Big Oxmox advised her not to do so, because there
