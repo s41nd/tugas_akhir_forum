@@ -1,8 +1,34 @@
 <?php
-  session_start();
+  require_once 'config/db_connect.php';
+
   if(!isset($_SESSION['username'])){
     header('location:login.php');
   }
+
+  if("CUMA BATAS PANGGIL MENU")
+  {
+      $query_check_menu_by_role = $conn->prepare("SELECT m.menu, m.role
+                                        FROM user u LEFT JOIN menu m ON u.role = m.role
+                                        WHERE u.id = ? && u.role = ?");
+    $query_check_menu_by_role->bind_param('is', $_SESSION['id'], $_SESSION['role']);
+    $query_check_menu_by_role->execute();
+
+    // if ($query_check_menu_by_role === false) {
+    //   die('Query execution failed: ' . $conn->error);
+    // } 
+    $result1 = $query_check_menu_by_role->get_result();
+    $menu_array = $result1->fetch_all(MYSQLI_ASSOC);
+
+    $query_check_submenu_by_role = $conn->prepare("SELECT m.role, m.menu, sm.submenu, sm.url
+                                                  FROM submenu sm INNER JOIN menu m ON sm.menu_id = m.id
+                                                  WHERE m.role = ?");
+    $query_check_submenu_by_role->bind_param('s',$_SESSION['role']);
+    $query_check_submenu_by_role->execute();
+
+    $result3 = $query_check_submenu_by_role->get_result();
+    $submenu_array = $result3->fetch_all(MYSQLI_ASSOC);
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +50,7 @@
               "Font Awesome 5 Brands",
               "simple-line-icons",
             ],
-            urls: ["assets/css/fonts.min.css"],
+            urls: ["../../assets/css/fonts.min.css"],
           },
           active: function () {
             sessionStorage.fonts = true;
@@ -84,110 +110,45 @@
         <div class="sidebar-wrapper scrollbar scrollbar-inner"> <!--SIDE BAR-->
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
-              <li class="nav-item active">
-                <a
-                  data-bs-toggle="collapse"
-                  href="#dashboard"
-                  class="collapsed"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-home"></i>
-                  <p>HOME</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="dashboard">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="../forum/index.html">
-                        <span class="sub-item">Dashboard</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-
-              <li class="nav-section">
-                <span class="sidebar-mini-icon">
-                  <i class="fa fa-ellipsis-h"></i>
-                </span>
-                <h4 class="text-section">Components</h4>
-              </li>
-
               <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#post">
-                  <i class="fas fa-layer-group"></i>
-                  <p>POST</p>
-                  <span class="caret"></span>
-                </a>
+                  <?php foreach ($menu_array as $menu) : ?>
+                    <a data-bs-toggle="collapse" href="#<?= htmlspecialchars($menu['menu']) ?>" class="collapsed" aria-expanded="false">
+                      <i class="fas 
+                        <?php
+                        // Menetapkan kelas ikon berdasarkan nama menu
+                        if ($menu['menu'] == "HOME") {
+                          echo "fa-home";
+                        } elseif ($menu['menu'] == "POST") {
+                          echo "fa-layer-group";
+                        } elseif ($menu['menu'] == "COURSE") {
+                          echo "fa-pen-square";
+                        } elseif ($menu['menu'] == "REPORT") {
+                          echo "fa-ban";
+                        }
+                        ?>">
+                      </i>
+                      <p><?= htmlspecialchars($menu['menu']) ?></p>
+                      <span class="caret"></span>
+                    </a>
 
-                <div class="collapse" id="post">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">New Post</span>
-                      </a>
-                    </li>
-                    
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Popular Post</span>
-                      </a>
-                    </li>
+                    <div class="collapse" id="<?= htmlspecialchars($menu['menu']) ?>">
+                      <ul class="nav nav-collapse">
+                        <?php foreach ($submenu_array as $submenu) :
+                          if ($submenu['menu'] == $menu['menu']) :
+                        ?>
+                            <li>
+                              <a href="<?= htmlspecialchars($submenu['url']) ?>">
+                                <span class="sub-item"><?= htmlspecialchars($submenu['submenu']) ?></span>
+                              </a>
+                            </li>
+                        <?php
+                          endif;
+                        endforeach;
+                        ?>
+                      </ul>
+                    </div>
 
-                    <li>
-                      <a href="#">
-                        <span class="sub-item" style="color: yellow;">CREAT POSTING</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#course">
-                  <i class="fas fa-pen-square"></i>
-                  <p>Course</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="course">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="forms/forms.html">
-                        <span class="sub-item">New Course</span>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="forms/forms.html">
-                        <span class="sub-item">Popular Course</span>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="forms/forms.html">
-                        <span class="sub-item" style="color: yellow;">CREATE COURSE</span>
-                      </a>
-                    </li>
-
-                  </ul>
-                </div>
-              </li>
-
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#ban">
-                  <i class="fas fa-ban"></i>
-                  <p>BAN REPORT</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="ban">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">BAN REPORT LIST</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                  <?php endforeach; ?>
               </li>
 
             </ul>
@@ -223,50 +184,8 @@
             class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
           >
             <div class="container-fluid">
-              <nav
-                class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
-              >
-                <div class="input-group" style="background-color: gray;">
-                  <div class="input-group-prepend">
-                    <button type="submit" class="btn btn-search pe-1">
-                      <i class="fa fa-search search-icon" style="color: aliceblue;"></i>
-                    </button>
-                  </div>
-
-                  <input
-                    type="text"
-                    placeholder="Search ..."
-                    class="form-control"
-                  />
-                </div>
-              </nav>
 
               <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                <li
-                  class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
-                >
-                  <a
-                    class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <i class="fa fa-search"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-search animated fadeIn">
-                    <form class="navbar-left navbar-form nav-search" style="background-color:gray;">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          placeholder="Search ..."
-                          class="form-control"
-                        />
-                      </div>
-                    </form>
-                  </ul>
-                </li>
 
                 <li class="nav-item topbar-user dropdown hidden-caret">
                   <a
@@ -277,7 +196,7 @@
                   >
                     <div class="avatar-sm" id="profile">
                       <img
-                        src="assets/img/profile.jpg"
+                        src="assets/img/<?=$_SESSION['profile_img']?>"
                         alt="..."
                         class="avatar-img rounded-circle"
                       />
@@ -294,7 +213,7 @@
                         <div class="user-box">
                           <div class="avatar-lg">
                             <img
-                              src="assets/img/profile.jpg"
+                              src="assets/img/<?=$_SESSION['profile_img']?>""
                               alt="image profile"
                               class="avatar-img rounded"
                             />
@@ -313,7 +232,7 @@
 
                       <li>
                         <div class="dropdown-divider"></div>
-                        <a href="config/logout.php" class="dropdown-item">Logout</a>
+                        <a href="../../config/logout.php" class="dropdown-item">Logout</a>
                       </li>
 
                     </div>
@@ -321,6 +240,7 @@
                 </li>
 
               </ul>
+
             </div>
           </nav>
           <!-- End Navbar -->
@@ -328,43 +248,13 @@
 
         <div class="container">
           <div class="page-inner">
-            <div
-              class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
-            >
+
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
                 <h3 class="fw-bold mb-3">WELCOME TO FORUM </h3>
-                <!-- <h6 class="op-7 mb-2">What's New On post</h6> -->
               </div>
-
-              <div class="ms-md-auto py-2 py-md-0">
-                <!-- <a href="#" class="btn btn-label-info btn-round me-2">Filter</a> -->
-
-                <!-- <a href="#" class="btn btn-primary btn-round">Filter</a> -->
-                <div class="btn-group dropstart">
-                  <button
-                    type="button"
-                    class="btn btn-black btn-border dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Filter
-                  </button>
-                  <!--ISI DROPDOWN FILTER-->
-                  <ul class="dropdown-menu" role="menu">
-                    <li>
-                      <a class="dropdown-item" href="#">HOT</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">NEW</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">TOP</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              
             </div>
+            
             <!--ISI DETAIL UPDATE-->
             <div class="row">
             
@@ -373,125 +263,39 @@
                   <div class="card-body">
 
                     <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-primary bubble-shadow-small"
-                        >
-                          <i class="fas fa-users"></i>
-                        </div>
-                      </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Last<br>Activity</p>
-                          <h4 class="card-title">0</h4>
-                        </div>
-                      </div>
+                      <button class="btn btn-danger btn xl" type="button" data-bs-toggle="collapse" data-bs-target="#collapseListNew" aria-expanded="false" aria-controls="collapseListNew">
+                        LIST REPORT NEW
+                      </button>
                     </div>
 
                   </div>
                 </div>
               </div>
+
               <div class="col">
                 <div class="card card-stats card-round">
                   <div class="card-body">
+
                     <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-info bubble-shadow-small"
-                        >
-                          <i class="fas fa-user-check"></i>
-                        </div>
-                      </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Update<br>Post</p>
-                          <h4 class="card-title">0</h4>
-                        </div>
-                      </div>
+                    <button class="btn btn-warning btn xl" type="button" data-bs-toggle="collapse" data-bs-target="#collapseListOld" aria-expanded="false" aria-controls="collapseListOld">
+                      LIST REPORT SOLVE per day
+                    </button>
                     </div>
+
                   </div>
                 </div>
               </div>
               
-              <div class="col">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-success bubble-shadow-small"
-                        >
-                          <i class="fa fa-book"></i>
-                        </div>
-                      </div>
-
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Update<br>Course</p>
-                          <h4 class="card-title">0</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-secondary bubble-shadow-small"
-                        >
-                          <i class="fa fa-users"></i>
-                        </div>
-                      </div>
-
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Friend<br>Activity</p>
-                          <h4 class="card-title">0</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col ">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-warning bubble-shadow-small"
-                        >
-                          <i class="fas fa-user-clock"></i>
-                        </div>
-                      </div>
-
-                      <div class="col col-stats ms-3 ms-sm-0">
-                        <div class="numbers">
-                          <p class="card-category">Last<br>Update</p>
-                          <h4 class="card-title">0</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
             </div>
+
             <!--ISI POST-->
-            ISI DI SINI SELAIN TABEL
+            ISI ATAS TABEL
 
             <div name="TABEL REPORT">
 
               <div name="div nya tabel report list">
-                <button class="btn btn-danger btn xl" type="button" data-bs-toggle="collapse" data-bs-target="#collapseListNew" aria-expanded="false" aria-controls="collapseListNew">
-                  LIST REPORT NEW
-                </button>
+                
 
                 <div class="collapse" id="collapseListNew">
                   <div class="card card-body">
@@ -593,10 +397,6 @@
 
               <div name="div nya tabel report list selesai">
 
-                <button class="btn btn-warning btn xl" type="button" data-bs-toggle="collapse" data-bs-target="#collapseListOld" aria-expanded="false" aria-controls="collapseListOld">
-                  LIST REPORT SOLVE per day
-                </button>
-
                 <div class="collapse" id="collapseListOld">
                   <div class="card card-body">
 
@@ -693,7 +493,9 @@
 
               </div>             
 
-            </div>  
+            </div>
+
+            ISI BAWA TABEL
 
           </div>
         </div>
