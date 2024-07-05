@@ -1,8 +1,20 @@
 <?php
-      session_start();
+      include_once 'config/db_connect.php';
+      
       if(!isset($_SESSION['username'])){
         header('location:login.php');
       }
+
+  if("CUMA BATAS PANGGIL badge"){
+    $query_check_badge_user = $conn->prepare("SELECT b.icon, b.name, b.description
+                                              FROM badge b INNER JOIN profile_has_badge1 phb ON b.id = phb.badge_id
+                                              WHERE phb.profile_id = ?");
+    $query_check_badge_user->bind_param('i', $_SESSION['profile_id']);
+    $query_check_badge_user->execute();
+
+    $badge_result = $query_check_badge_user->get_result();
+    $badge_array = $badge_result->fetch_all(MYSQLI_ASSOC);
+  }    
     
 ?>
 
@@ -336,14 +348,7 @@
               EDIT
             </button>
             
-            <div
-              class="modal fade"
-              id="exampleModal"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            > <!-- FORM EDIT AWAL -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> <!-- FORM EDIT AWAL -->
 
               <div class="modal-dialog modal-dialog-centered" role="document">
 
@@ -383,6 +388,7 @@
               </div>
 
             </div> <!-- FORM EDIT AKHIR -->
+          
 
             <div class="row"> <!--ROW-->
 
@@ -456,16 +462,21 @@
                             role="tabpanel"
                             aria-labelledby="pills-profile-tab"
                           >
-                            <p>
-                              INI NANTI GAMBAR BADGE
-                            </p>
-                            <p>
-                              The Big Oxmox advised her not to do so, because there
-                              were thousands of bad Commas, wild Question Marks and
-                              devious Semikoli, but the Little Blind Text didn’t
-                              listen. She packed her seven versalia, put her initial
-                              into the belt and made herself on the way.
-                            </p>
+                            <?php foreach($badge_array as $badge) :?>
+
+                              <img
+                                class="avatar avatar-xxl" 
+                                src="assets/img/badge/<?=$badge['icon']?>"
+                                alt="..."
+                                
+                              />
+                              <p>
+                                
+                                <?=$badge['name']?>
+                                <?=$badge['description']?>
+                              </p>
+                              
+                            <?php endforeach;?>
                           </div>
 
                         </div>
@@ -544,11 +555,12 @@
                               aria-labelledby="v-pills-profile-tab"
                             >
                               <p>
-                                Follow List
+                                INI NANTI
                               </p>
                               <p>
                                 "INI NANTI LIST FOLLOW"
                               </p>
+
                             </div>
 
                             <div
